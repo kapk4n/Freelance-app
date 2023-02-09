@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_02_08_163209) do
+ActiveRecord::Schema[7.0].define(version: 2023_02_09_120917) do
   create_table "clients", force: :cascade do |t|
     t.integer "user_id", null: false
     t.datetime "created_at", null: false
@@ -30,8 +30,21 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_08_163209) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "freelanc_id"
-    t.integer "stat"
+    t.string "title"
+    t.integer "cost"
+    t.string "message"
     t.index ["client_id"], name: "index_orders_on_client_id"
+  end
+
+  create_table "reviews", force: :cascade do |t|
+    t.integer "freelancer_id", null: false
+    t.integer "order_id", null: false
+    t.string "message"
+    t.integer "mark"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["freelancer_id"], name: "index_reviews_on_freelancer_id"
+    t.index ["order_id"], name: "index_reviews_on_order_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -48,4 +61,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_08_163209) do
   add_foreign_key "clients", "users"
   add_foreign_key "freelancers", "users"
   add_foreign_key "orders", "clients"
+  add_foreign_key "reviews", "freelancers"
+  add_foreign_key "reviews", "orders"
 end
