@@ -1,0 +1,16 @@
+<h1>OrderList#index</h1>
+<p>Find me in app/views/order_list/index.html.erb</p>
+
+<% @orders.each do |i| %>
+<div class="card">
+  <div class="card-body">
+  <h5 class="card-title"><%= i.title %> </h5>
+  <p class="card-text">Cost: <%= i.cost %></p>
+  <div calss="card-text">
+  <%= i.message[0..100]... %>
+  </div>
+    <%= link_to 'Show details', ord_prof_path, class:"btn btn-primary" %>
+  </div>
+</div>
+<br>
+<% end %>

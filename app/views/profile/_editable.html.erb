@@ -1,0 +1,35 @@
+<%= form_with url: profile_change_url(id: params[:id]), method: :put do |form| %>
+  <div class="modal-body">
+
+    <div class="form-group">
+      <p>Employment: <%= form.select :status, Freelancer.statuses, selected: Freelancer.statuses[@freelancer.status] %></p>
+    </div>
+
+    <div class="form-group">
+      <p>Info: <%= form.text_area :info, class: "form-control form-control-lg", value: "#{@freelancer.info}" %></p>
+    </div>
+
+    <div class="form-group">
+      <p>Stack: <%= form.text_area :stack, class: "form-control form-control-lg", value: "#{@freelancer.stack}" %></p>
+    </div>
+
+    <div class="form-group">
+      <p>Education: <%= form.text_area :education, class: "form-control form-control-lg", value: "#{@freelancer.education}" %>
+    </div>
+
+    <div class="form-group">
+      <p>Languages: <%= form.text_area :languag, class: "form-control form-control-lg", value: "#{@freelancer.languag}" %>
+    </div>
+
+    <div class="form-group">
+      <%= form.select :experienc, Freelancer.experiencs, selected: Freelancer.experiencs[@freelancer.experienc] %>
+    </div>
+      
+    <div class="form-group">
+      <%= form.submit class:"btn btn-primary" %>
+    </div>
+
+  </div>
+
+<%end%>
+  

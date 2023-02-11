@@ -1,6 +1,17 @@
 Rails.application.routes.draw do
 
-  get 'profile/index'
+  get 'ord_prof', to: "order_prof#index"
+  get 'ord_prof_show', to: "order_prof#show"
+  get 'ord_prof_edit', to: "order_prof#edit"
+
+  get "order_list", to: "order_list#index"
+  get "order_list", to: "order_list#show"
+
+  get "freela_list", to: "freela_list#index"
+  get "freela_list", to: "freela_list#show"
+
+  post "profile_edit", to: "profile#index"
+  put "profile_change", to: "profile#edit"
   get "profile", to: "profile#show"
 
   root "main#index"

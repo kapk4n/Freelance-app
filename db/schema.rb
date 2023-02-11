@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_02_09_120917) do
+ActiveRecord::Schema[7.0].define(version: 2023_02_11_094524) do
   create_table "clients", force: :cascade do |t|
     t.integer "user_id", null: false
     t.datetime "created_at", null: false
@@ -22,6 +22,12 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_09_120917) do
     t.integer "user_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "status"
+    t.string "info"
+    t.string "stack"
+    t.string "languag"
+    t.integer "experienc"
+    t.string "education"
     t.index ["user_id"], name: "index_freelancers_on_user_id"
   end
 
@@ -33,6 +39,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_09_120917) do
     t.string "title"
     t.integer "cost"
     t.string "message"
+    t.date "deadline"
     t.index ["client_id"], name: "index_orders_on_client_id"
   end
 
