@@ -1,0 +1,38 @@
+<%= form_with url: ord_prof_edit_path(id: params[:id]), method: :put do |form| %>
+  <div class="modal-body">
+
+    <div class="form-group">
+      <p>Title: <%= form.text_field :title, class: "form-control form-control-lg", value: "#{@order.title}" %></p>
+    </div>
+
+    <div class="form-group">
+      <p>Deadline: <%= form.text_area :deadline, class: "form-control form-control-lg", value: "#{@order.deadline}" %></p>
+    </div>
+
+    <div class="form-group">
+      <p>Cost: <%= form.number_field :cost, class: "form-control form-control-lg", value: "#{@order.cost}" %>
+    </div>
+
+    <div class="form-group">
+      <p>Task: <%= form.text_area :message, class: "form-control form-control-lg", value: "#{@order.message}" %>
+    </div>
+      
+    <div class="form-group">
+      <%= form.submit class:"btn btn-primary" %>
+    </div>
+
+  </div>
+
+<%end%>
+  
+  <%= form_with url: ord_prof_delete_path(id: params[:id]), method: :delete do |form| %>
+  <div class="modal-body">
+  
+    <div class="form-group">
+      <%= form.submit "Delete", class:"btn btn-danger" %>
+    </div>
+
+  </div>
+
+<%end%>
+  

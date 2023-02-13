@@ -6,6 +6,8 @@
 
 <% if @user.role == 'freelancer' %>
   <%= render "info" %>
+<% else %>
+  <%= render "cl_info" %>
 <% end %>
 
 

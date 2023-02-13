@@ -1,8 +1,12 @@
 Rails.application.routes.draw do
 
   get 'ord_prof', to: "order_prof#index"
-  get 'ord_prof_show', to: "order_prof#show"
-  get 'ord_prof_edit', to: "order_prof#edit"
+  post 'ord_prof_take_fr', to: "order_prof#take_freelance"
+  post 'ord_prof_show', to: "order_prof#show"
+  post 'ord_prof_freel', to: "order_prof#prefree"
+  put 'ord_prof_edit', to: "order_prof#edit"
+  post 'order_sub', to: "order_prof#submitting"
+  delete 'ord_prof_delete', to: "order_prof#delete"
 
   get "order_list", to: "order_list#index"
   get "order_list", to: "order_list#show"

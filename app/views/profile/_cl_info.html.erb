@@ -1,0 +1,29 @@
+<div id="info">
+<%= form_with do |form| %>
+  <div class="modal-body">
+
+    <div class="form-group">
+      <p>Orders: <%= form.label "#{Order.where(client_id: @client.id).count}", class: "form-label mb-2 mt-3" %>.</p>
+    </div>
+
+    <% Order.where(client_id: @client.id).each do |i| %>
+    <div class="form-group">
+      <div class="card">
+        <div class="card-body">
+        <h5 class="card-title"><%= i.title %> </h5>
+        <p class="card-text">Cost: <%= i.cost %></p>
+        <div calss="card-text">
+        <%= i.message[0..100]... %>
+        </div>
+          <%= link_to 'Show details', ord_prof_path(id: i.id), class:"btn btn-primary" %>
+        </div>
+      </div>
+      <br>
+      <% end %>
+
+    </div>
+  </div>
+<%end%>
+
+
+</div>

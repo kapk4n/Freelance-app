@@ -1,2 +1,47 @@
-<h1>OrderProf#index</h1>
-<p>Find me in app/views/order_prof/index.html.erb</p>
+<div id="info">
+
+<h1><%= @order.title %></h1>
+
+<h2>Customer: <%= @order.client.user.f_name %> <%= @order.client.user.l_name %></h2>
+<h3> Deadline: <%= @order.deadline.to_fs(:long) %> </h3>
+<h3>Cost: <%= @order.cost %> </h3>
+<br>
+
+<h4>Task:</h4>
+<%= form_with do |form| %>
+  <div class="form-group">
+    <p><%= form.text_area "#{@order.message}", disabled: true, class: "form-control form-control-lg", value: "#{@order.message}" %></p>
+  </div>
+<% end %>
+<br>
+<br>
+
+<% if Current.user.role == 'freelancer' && PreOrder.where(freelancer_id: Current.user.freelancers.first.id).count.zero? %>
+  <%= button_to "take", order_sub_path(order_id: @order.id, freelancer_id: (Current.user.freelancers.first.id), id: params[:id]), method: :post, class:"btn btn-outline-success" %>
+<% end %>
+
+<% if @order.client == Current.user.clients.first %>
+  <%# <%= button_to "look", ord_prof_show_path , method: :post, class:"btn btn-outline-success"  %>
+    <%= form_with method: :post, url: ord_prof_show_path(id: @order.id) do |form| %>
+
+      <div class="form-group">
+        <%= form.submit "Edit", class:"btn btn-primary"%>
+      </div>
+      
+  <% end %>
+<% end %>
+
+<% if @order.client == Current.user.clients.first %>
+    <%= form_with method: :post, url: ord_prof_freel_path(id: @order.id) do |form| %>
+
+      <div class="form-group">
+        <%= form.submit "Check Freelancers", class:"btn btn-primary"%>
+      </div>
+      
+  <% end %>
+<% end %>
+
+</div>
+
+<div id="freela_list">
+</div>

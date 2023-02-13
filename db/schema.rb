@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_02_11_094524) do
+ActiveRecord::Schema[7.0].define(version: 2023_02_11_174341) do
   create_table "clients", force: :cascade do |t|
     t.integer "user_id", null: false
     t.datetime "created_at", null: false
@@ -43,6 +43,15 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_11_094524) do
     t.index ["client_id"], name: "index_orders_on_client_id"
   end
 
+  create_table "pre_orders", force: :cascade do |t|
+    t.integer "order_id", null: false
+    t.integer "freelancer_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["freelancer_id"], name: "index_pre_orders_on_freelancer_id"
+    t.index ["order_id"], name: "index_pre_orders_on_order_id"
+  end
+
   create_table "reviews", force: :cascade do |t|
     t.integer "freelancer_id", null: false
     t.integer "order_id", null: false
@@ -68,6 +77,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_11_094524) do
   add_foreign_key "clients", "users"
   add_foreign_key "freelancers", "users"
   add_foreign_key "orders", "clients"
+  add_foreign_key "pre_orders", "freelancers"
+  add_foreign_key "pre_orders", "orders"
   add_foreign_key "reviews", "freelancers"
   add_foreign_key "reviews", "orders"
 end

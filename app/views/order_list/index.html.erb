@@ -9,7 +9,7 @@
   <div calss="card-text">
   <%= i.message[0..100]... %>
   </div>
-    <%= link_to 'Show details', ord_prof_path, class:"btn btn-primary" %>
+    <%= link_to 'Show details', ord_prof_path(id: i.id), class:"btn btn-primary" %>
   </div>
 </div>
 <br>
