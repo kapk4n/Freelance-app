@@ -16,11 +16,11 @@
 <br>
 <br>
 
-<% if Current.user.role == 'freelancer' && PreOrder.where(freelancer_id: Current.user.freelancers.first.id).count.zero? %>
-  <%= button_to "take", order_sub_path(order_id: @order.id, freelancer_id: (Current.user.freelancers.first.id), id: params[:id]), method: :post, class:"btn btn-outline-success" %>
+<% if @cur_user.role == 'freelancer' && PreOrder.where(freelancer_id: @cur_user.freelancers.first.id).count.zero? && @order.freelanc_id.nil?%>
+  <%= button_to "Take", order_sub_path(order_id: @order.id, freelancer_id: (@cur_user.freelancers.first.id), id: params[:id]), method: :post, class:"btn btn-outline-success" %>
 <% end %>
 
-<% if @order.client == Current.user.clients.first %>
+<% if @order.client == @cur_user.clients.first %>
   <%# <%= button_to "look", ord_prof_show_path , method: :post, class:"btn btn-outline-success"  %>
     <%= form_with method: :post, url: ord_prof_show_path(id: @order.id) do |form| %>
 
@@ -31,7 +31,7 @@
   <% end %>
 <% end %>
 
-<% if @order.client == Current.user.clients.first %>
+<% if @order.client == @cur_user.clients.first %>
     <%= form_with method: :post, url: ord_prof_freel_path(id: @order.id) do |form| %>
 
       <div class="form-group">

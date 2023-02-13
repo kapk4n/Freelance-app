@@ -10,6 +10,7 @@ class ProfileController < ApplicationController
     @user = User.find_by(id: params[:id])
     @freelan = @user.freelancers.first
     @client = @user.clients.first
+    # @order = Order.where(client_id: @client.id)
   end
 
   def edit

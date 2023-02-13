@@ -1,5 +1,6 @@
 class OrderProfController < ApplicationController
   def index
+    @cur_user = Current.user
     @order = Order.find_by(id: params[:id])
   end
 
