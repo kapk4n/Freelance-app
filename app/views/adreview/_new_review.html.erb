@@ -1,0 +1,21 @@
+<%= turbo_frame_tag :remote_modal, target: :_top do %>
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" data-controller="bs-modal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel"> Review </h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+
+      <%= form_with model: @freelan, url: profile_path(id: params[:id]), method: :post do |form| %>
+        <div class="modal-body">
+            <%= form.submit 'Upload Review', class: 'btn btn-success' %>
+        </div> 
+      <%end%>
+
+
+    </div>
+  </div>
+  </div>
+</div>
+<% end %>

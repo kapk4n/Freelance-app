@@ -16,4 +16,10 @@ class ApplicationController < ActionController::Base
       redirect_to root_path, alert: 'Wrong id'
     end
   end
+
+  def order_checking
+    if Order.find_by(id: params[:id]).nil?
+      redirect_to root_path, alert: 'Wrong id'
+    end
+  end
 end

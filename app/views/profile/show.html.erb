@@ -4,10 +4,27 @@
 <br>
 <h5> In this service since: <%= @user.created_at.day %>.<%= @user.created_at.month %>.<%= @user.created_at.year %> </h5>
 
-<% if @user.role == 'freelancer' %>
-  <%= render "info" %>
-<% else %>
-  <%= render "cl_info" %>
+<div>
+  <% if Current.user.role == 'client' %>
+    <%= form_with method: :post, url: add_review_path(id: params[:id]) do |form| %>
+
+      <div class="form-group">
+        <%= form.submit "Review", class:"btn btn-primary"%>
+      </div>
+    <% end %>
+  <% end %>
+</div>
+
+<% case @user.role %>
+  <% when 'freelancer' %>
+    <%= render "info" %>
+  <% when 'client' %>
+    <%= render "cl_info" %>
+  <% when 'admin' %>
+    <%= 'lajsfljflf' %>
+  <% else %>
+    <% redirect_to root_path %>
+    <%= render 'sessions/session_modal' %>
 <% end %>
 
 

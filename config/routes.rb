@@ -1,5 +1,9 @@
 Rails.application.routes.draw do
 
+  get 'adreview/index'
+  post 'add_review', to: "adreview#show"
+  put 'adreview/edit'
+
   get 'ord_prof', to: "order_prof#index"
   post 'ord_prof_take_fr', to: "order_prof#take_freelance"
   post 'ord_prof_show', to: "order_prof#show"

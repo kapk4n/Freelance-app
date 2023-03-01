@@ -7,10 +7,14 @@ class ProfileController < ApplicationController
   end
 
   def show
-    @user = User.find_by(id: params[:id])
-    @freelan = @user.freelancers.first
-    @client = @user.clients.first
-    # @order = Order.where(client_id: @client.id)
+    unless Current.user.nil? || Current.user.role.nil?
+      @user = User.find_by(id: params[:id])
+      @freelan = @user.freelancers.first
+      @client = @user.clients.first
+      # @order = Order.where(client_id: @client.id)
+    else
+      redirect_to root_path, alert: 'You must be logged in'
+    end
   end
 
   def edit
