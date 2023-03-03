@@ -6,11 +6,9 @@ class OrderListController < ApplicationController
     orders.each do |i|
       if i.deadline < Date.today
         i.update(status: 'finished')
-      else
-        i.update(status: 'good')
       end
     end
-    @orders = Order.where(status: 'good')
+    @orders = Order.where(status: 'good', freelanc_id: nil)
   end
 
   def add

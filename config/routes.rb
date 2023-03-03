@@ -2,7 +2,7 @@ Rails.application.routes.draw do
 
   get 'adreview/index'
   post 'add_review', to: "adreview#show"
-  put 'adreview/edit'
+  post 'adreview/edit'
 
   get 'ord_prof', to: "order_prof#index"
   post 'ord_prof_take_fr', to: "order_prof#take_freelance"
@@ -11,6 +11,7 @@ Rails.application.routes.draw do
   put 'ord_prof_edit', to: "order_prof#edit"
   post 'order_sub', to: "order_prof#submitting"
   delete 'ord_prof_delete', to: "order_prof#delete"
+  put 'archivate', to: "order_prof#archivate"
 
   get "order_list", to: "order_list#index"
   get "order_list", to: "order_list#show"
@@ -20,6 +21,7 @@ Rails.application.routes.draw do
 
   post "profile_edit", to: "profile#index"
   put "profile_change", to: "profile#edit"
+  put "profile", to: "profile#show"
   get "profile", to: "profile#show"
   post "new_order", to: "profile#input_data"
   put "save_order", to: "profile#add_order"

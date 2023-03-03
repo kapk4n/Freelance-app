@@ -7,7 +7,7 @@
 
 <div>
   <% if Current.user.role == 'client' && Current.user.id != @user.id %><div>
-    <%= form_with method: :post, url: add_review_path(id: params[:id]) do |form| %>
+    <%= form_with method: :post, url: add_review_path(id: @user.id) do |form| %>
 
       <div class="form-group">
         <%= form.submit "Review", class:"btn btn-primary"%>

@@ -41,6 +41,10 @@ class OrderProfController < ApplicationController
 
     params[:message] != '' ? order.update(message: params[:message]) : flash[:alert] = "Can not be empty"
 
+    if order.deadline > Date.today
+      order.update(status: 'good')
+    end
+
     redirect_to ord_prof_path(id: params[:id])
   end
 
@@ -56,11 +60,21 @@ class OrderProfController < ApplicationController
   end
 
   def submitting
-    if Current.user.role == 'freelancer' && PreOrder.where(freelancer_id: Current.user.freelancers.first.id).count.zero?
+    if Current.user.role == 'freelancer' && PreOrder.where(freelancer_id: Current.user.freelancers.first.id, order_id: params[:order_id]).count.zero? && Order.find_by(id: params[:order_id]).status == 'good' 
       PreOrder.create(order_id: params[:order_id], freelancer_id: params[:freelancer_id])
       redirect_to ord_prof_url(id: params[:id])
     else
-      flash[:alert] = "You already have taken"
+      flash[:alert] = "You have already taken"
     end
+  end
+
+  def archivate
+    ord = Order.find_by(id: params[:id])
+    if ord.status == 'finished' && ord.deadline > Date.today
+      ord.update(status: 'good')
+    else
+      ord.update(status: 'finished')
+    end
+    redirect_to ord_prof_path(id: ord.id)
   end
 end

@@ -1,6 +1,13 @@
+<% if @order.status == 'finished' %>
+  <h2> <div class="blocktext"> This Order is archived! </div> </h2>
+<% end %>
+
 <div id="info">
 
 <h1><%= @order.title %></h1>
+
+
+
 
 <h2>Customer: <%= @order.client.user.f_name %> <%= @order.client.user.l_name %></h2>
 <h3> Deadline: <%= @order.deadline.to_fs(:long) %> </h3>
@@ -17,7 +24,7 @@
 <br>
 
 <% unless Current.user.nil? %>
-  <% if @cur_user.role == 'freelancer' && PreOrder.where(freelancer_id: @cur_user.freelancers.first.id).count.zero? && @order.freelanc_id.nil?%>
+  <% if @cur_user.role == 'freelancer' && PreOrder.where(freelancer_id: @cur_user.freelancers.first.id, order_id: @order.id).count.zero? && @order.freelanc_id.nil? && @order.status == 'good' %>
     <%= button_to "Take", order_sub_path(order_id: @order.id, freelancer_id: (@cur_user.freelancers.first.id), id: params[:id]), method: :post, class:"btn btn-outline-success" %>
   <% end %>
 
@@ -30,16 +37,28 @@
         </div>
         
       <% end %>
-  <% end %>
 
-  <% if @order.client == @cur_user.clients.first %>
       <%= form_with method: :post, url: ord_prof_freel_path(id: @order.id) do |form| %>
 
         <div class="form-group">
           <%= form.submit "Check Freelancers", class:"btn btn-primary"%>
         </div>
         
-    <% end %>
+      <% end %>
+      
+      <%= form_with method: :put, url: archivate_path(id: @order.id) do |form| %>
+        <% if @order.status == 'finished' && @order.deadline > Date.today %>
+          <div class="form-group">
+            <%= form.submit "Unarchivete It", class:"btn btn-success"%>
+          </div>
+        <% else %>
+          <div class="form-group">
+            <%= form.submit "Archivete It", class:"btn btn-danger"%>
+          </div>
+        <% end %>
+        
+      <% end %>
+
   <% end %>
 <% end %>
 

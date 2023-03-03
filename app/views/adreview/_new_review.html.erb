@@ -7,9 +7,21 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
 
-      <%= form_with model: @freelan, url: profile_path(id: params[:id]), method: :post do |form| %>
+      <%= form_with url: adreview_edit_path(id: @freelan.id), method: :post do |form| %>
         <div class="modal-body">
-            <%= form.submit 'Upload Review', class: 'btn btn-success' %>
+
+          <%# message, mark %> 
+                <p><select name="user[order]" id="user_order">
+                  <% @order_list.each_with_index do |i| %>
+                      <option value=<%= i.id %>> <%= i.title %> </option>
+                  <% end %>
+                </select></p>
+
+            <%= form.number_field :mark, min: 1, max: 5,  class: "form-control form-control-lg"%>
+            <%= form.text_area :message, class: "form-control form-control-lg" %>
+
+
+            <%= form.submit 'Upload Review', class: 'btn btn-success', data: {action: "click->bs-modal#submitEnd" }, id: 'reg-btn' %>
         </div> 
       <%end%>
 
