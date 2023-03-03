@@ -1,9 +1,22 @@
 class ProfileController < ApplicationController
-  before_action :profile_checking
+  before_action :profile_checking, except: [:input_data, :add_order]
 
   def index
     @freelancer = User.find_by(id: params[:id]).freelancers.first
     # Freelancer.statuses.with_index
+  end
+
+  def input_data
+  end
+
+  def add_order
+    @order = Order.new(ord_params)
+    if @order.save 
+      redirect_to order_list_path
+    else
+      flash[:alert] = "wrong data"
+      redirect_to order_list_path
+    end
   end
 
   def show
@@ -33,5 +46,11 @@ class ProfileController < ApplicationController
     params[:experienc] != '' ? frela.update(experienc: params[:experienc].to_i) : flash[:alert] = "Can not be empty"
 
     redirect_to profile_path(id: params[:id])
+  end
+
+  private
+
+  def ord_params
+    params.permit(:title, :deadline.to_s, :cost, :message, :client_id, :freelanc_id, :status)
   end
 end

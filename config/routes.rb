@@ -21,6 +21,8 @@ Rails.application.routes.draw do
   post "profile_edit", to: "profile#index"
   put "profile_change", to: "profile#edit"
   get "profile", to: "profile#show"
+  post "new_order", to: "profile#input_data"
+  put "save_order", to: "profile#add_order"
 
   root "main#index"
   get 'main/show'

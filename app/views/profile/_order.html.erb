@@ -1,0 +1,44 @@
+<%= turbo_frame_tag :remote_modal, target: :_top do %>
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" data-controller="bs-modal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel"> New Order </h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+  <%= form_with url: save_order_path(client_id: Current.user.clients.first.id, status: 'good'), method: :put do |form| %>
+    <div class="modal-body">
+
+
+  <div class="modal-body">
+
+    <div class="form-group">
+      <%#  <%= form.text_field :title, class: "form-control form-control-lg"%></p> 
+      <p>Title: <input type="text" class="form-control" id="title" name='title' aria-describedby="validationServer03Feedback" required> </p>
+    </div>
+
+    <div class="form-group">
+      <p>Deadline:  <input type="date" class="form-control" id="deadline" name='deadline' aria-describedby="validationServer03Feedback" required> </p>
+    </div>
+
+    <div class="form-group">
+      <p>Cost: <input type="number" class="form-control" id="cost" name='cost' aria-describedby="validationServer03Feedback" required>  </p>
+    </div>
+
+    <div class="form-group">
+      <p>Task: <textarea class="form-control" id="message" name='message' aria-describedby="validationServer03Feedback" required> </textarea>  </p>
+    </div>
+      
+    <div class="form-group">
+      <%= form.submit "Submit", class: "btn btn-success", data: {action: "click->bs-modal#submitEnd" }, id: 'reg-btn' %>
+    </div>
+
+  </div>
+
+
+<% end %>
+    </div>
+  </div>
+  </div>
+</div>
+<% end %>

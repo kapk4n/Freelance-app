@@ -7,6 +7,7 @@
       <div class="card-body">
       <h5 class="card-title"><%= i.title %> </h5>
       <p class="card-text">Cost: <%= i.cost %></p>
+      <p class="card-text">Customer: <%= i.client.user.f_name %> <%= i.client.user.l_name %> </p>
       <div calss="card-text">
       <%= i.message[0..100]... %>
       </div>
