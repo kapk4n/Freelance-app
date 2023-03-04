@@ -9,8 +9,8 @@
   <%= form_with url: ord_prof_take_fr_path, method: :post do |form| %>
     <div class="modal-body">
       <% @preorder.each do |i| %>
-        <%= form.label @freelancers.find_by(id: i.freelancer_id).id %>
-        <%= button_to "root_path", ord_prof_take_fr_path(id: params[:id], fr_id: @freelancers.find_by(id: i.freelancer_id).id) %>
+        <%= form.label "#{@freelancers.find_by(id: i.freelancer_id).user.f_name} #{@freelancers.find_by(id: i.freelancer_id).user.l_name}"  %>
+        <%= button_to "Invite him", ord_prof_take_fr_path(id: params[:id], fr_id: @freelancers.find_by(id: i.freelancer_id).id), class: 'btn btn-success' %>
         <br>
       <% end %>
 

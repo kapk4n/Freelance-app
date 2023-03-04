@@ -16,5 +16,64 @@
 
 .blocktext {
   text-align: center;
+}
 
+.bad {
+  color: red;
+	float: right;
+}
+.soso {
+  color: #ffc107;
+	float: right;
+}
+.good {
+  color: green;
+	float: right;
+}
+
+.alignleft {
+	float: left;
+}
+
+
+* {
+  box-sizing: border-box;
+}
+
+.rating {
+  width: 120px;
+  height: 24px;
+  position: relative;
+  background-color: gray;
+	float: right;
+
+}
+
+.rating progress.rating-bg {
+  -webkit-appearance: none;
+  -moz-appearence: none;
+  appearance: none;
+  border: none;
+  display: inline-block;
+  height: 24px;
+  width: 100%;
+  color: orange;
+	float: right;
+
+}
+
+.rating progress.rating-bg::-webkit-progress-value {
+  background-color: orange;
+}
+
+.rating progress.rating-bg::-moz-progress-bar {
+  background-color: orange;
+}
+
+.rating svg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
 }

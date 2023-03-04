@@ -1,12 +1,41 @@
-<h1><%= @user.f_name %> <%= @user.l_name%></h1>
 
-<h3><%= @user.role %></h3>
-<br>
+      <h1>
+      <p class="alignleft">  <%= @user.f_name %> <%= @user.l_name%>  </p>
+
+    <% if @user.role == 'freelancer' %>
+      <% if @adr_marks < 3 %>
+        <p class="bad"> <%= @adr_marks.to_s[0...4] %> </p>
+      <% elsif @adr_marks >= 3 && @adr_marks < 4 %>
+        <p class="soso"> <%= @adr_marks.to_s[0...4] %> </p> 
+      <% elsif @adr_marks >= 4 %>
+        <p class="good"> <%= @adr_marks.to_s[0...4] %> </p>
+      <% end %>
+      </h1> 
+
+      <% end %>
+      <div style="clear: both;"></div>
+
+      <h3 class="alignleft"><%= @user.role %></h3>
+
+    <% if @user.role == 'freelancer' %>
+
+        <h3 class="rating">
+        <!--   <div class="rating-bg" style="width: 90%;"></div> -->
+          <progress class="rating-bg" value="<%= @adr_marks %>" max="5"></progress>
+          <svg><use xlink:href="#fivestars"/></svg>
+        </h3>
+
+      <% end %>
+      <br>
+      <div style="clear: both;"></div>
+
+
+
 
 <h5> In this service since: <%= @user.created_at.day %>.<%= @user.created_at.month %>.<%= @user.created_at.year %> </h5>
 
 <div>
-  <% if Current.user.role == 'client' && Current.user.id != @user.id %><div>
+  <% if Current.user.role == 'client' && @user.role == 'freelancer' %><div>
     <%= form_with method: :post, url: add_review_path(id: @user.id) do |form| %>
 
       <div class="form-group">

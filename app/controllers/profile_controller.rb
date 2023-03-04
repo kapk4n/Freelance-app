@@ -25,14 +25,24 @@ class ProfileController < ApplicationController
       @client = @user.clients.first
       # @order = Order.where(client_id: @client.id)
 
-      marks = Review.where(freelancer_id: @freelan.id)
-      @adr_marks = 0
-      if marks != []
-        marks.each do |i|
-          @adr_marks += i.mark
+      if @user.role == 'freelancer' 
+        marks = Review.where(freelancer_id: @freelan.id)
+        @adr_marks = 0.0
+        @count_good = 0
+        @count_bad = 0
+        if marks != []
+          marks.each do |i|
+            @adr_marks += i.mark
+            if i.mark >= 3
+              @count_good += 1
+            elsif i.mark < 3
+              @count_bad += 1
+            end
+          end
+          @adr_marks = @adr_marks / marks.count
         end
-        @adr_marks = (@adr_marks / marks.count) * 20
       end
+      
     else
       redirect_to root_path, alert: 'You must be logged in'
     end

@@ -1,11 +1,17 @@
-  <br>
-  <div class="progress">
-    <div class="progress-bar bg-success" role="progressbar" style="width: <%= @adr_marks %>%" aria-valuenow=" <%= @adr_marks %> " aria-valuemin="0" aria-valuemax="100"></div> 
-  </div>
-  <br>
 
 <div id="info">
+
+
 <%= form_with do |form| %>
+
+  <%# <br>
+
+<div class="progress">
+  <div class="progress-bar bg-success" role="progressbar" style="width: <%= @count_good.to_f / (@count_good + @count_bad) *100 %" aria-valuenow="30" aria-valuemin="0" aria-valuemax="100"></div>
+  <div class="progress-bar bg-danger" role="progressbar" style="width: <%= @count_bad.to_f / (@count_good + @count_bad) *100 %" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100"></div>
+</div>
+  <br> %>
+
 
   <div class="modal-body">
 
