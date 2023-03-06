@@ -59,8 +59,6 @@ class ProfileController < ApplicationController
 
     params[:education] != '' ? frela.update(education: params[:education]) : flash[:alert] = "Can not be empty"
 
-    params[:languag] != '' ? frela.update(languag: params[:languag]) : flash[:alert] = "Can not be empty"
-
     params[:experienc] != '' ? frela.update(experienc: params[:experienc].to_i) : flash[:alert] = "Can not be empty"
 
     redirect_to profile_path(id: params[:id])

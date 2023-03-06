@@ -32,10 +32,6 @@
     </div>
 
     <div class="form-group">
-      <p>Languages: <%= form.text_area "#{@freelan.languag}", disabled: true, class: "form-control form-control-lg", value: "#{@freelan.languag}" %></p>
-    </div>
-
-    <div class="form-group">
     <% if @freelan.experienc == '0' %>
       <p>Experience: No experience</p>
     <% else %>

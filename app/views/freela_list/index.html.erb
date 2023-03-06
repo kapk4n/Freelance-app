@@ -1,20 +1,27 @@
 <h1>FreelaList#index</h1>
 <p>Find me in app/views/freela_list/index.html.erb</p>
 
-<% @freelancers.each do |i| %>
-<div class="card">
-  <%# <img src="..." class="card-img-top" alt="..."> %>
-  <div class="card-body">
-    <h5 class="card-title">  <%= i.user.f_name %> <%= i.user.l_name %></h5>
-    <p class="card-text">  <%= i.user.email %></p>
-    <% if i.experienc == '0' || i.experienc.nil? %>
-      <p><p class="fw-bolder"> Experience: </p> No experience</p>
-    <% else %>
-      <p> <p class="fw-bolder"> Experience: </p> <%= "#{i.experienc}"%> years.</p>
-    <%end%>
-    <p><p class="fw-bolder">Employment: </p> <%= i.status %></p>
-    <%= link_to 'Profile', profile_path(id: i.user.id), class:"btn btn-primary" %>
+  <%= form_with method: :post, url: freela_search_url do |form| %>
+        <%= form.text_field :search_param, placeholder: 'ruby', class: 'form-control'%>
+        <%= form.submit class: 'btn btn-primary mb-3' %>
+  <% end %>
+
+<div id="result_searching">
+  <% @freelancers.each do |i| %>
+  <div class="card">
+    <%# <img src="..." class="card-img-top" alt="..."> %>
+    <div class="card-body">
+      <h5 class="card-title">  <%= i.user.f_name %> <%= i.user.l_name %></h5>
+      <p class="card-text">  <%= i.user.email %></p>
+      <% if i.experienc == '0' || i.experienc.nil? %>
+        <p><p class="fw-bolder"> Experience: </p> No experience</p>
+      <% else %>
+        <p> <p class="fw-bolder"> Experience: </p> <%= "#{i.experienc}"%> years.</p>
+      <%end%>
+      <p><p class="fw-bolder">Employment: </p> <%= i.status %></p>
+      <%= link_to 'Profile', profile_path(id: i.user.id), class:"btn btn-primary" %>
+    </div>
   </div>
+  <br>
+  <% end %>
 </div>
-<br>
-<% end %>

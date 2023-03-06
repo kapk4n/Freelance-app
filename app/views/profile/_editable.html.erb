@@ -18,10 +18,6 @@
     </div>
 
     <div class="form-group">
-      <p>Languages: <%= form.text_area :languag, class: "form-control form-control-lg", value: "#{@freelancer.languag}" %>
-    </div>
-
-    <div class="form-group">
       <%= form.select :experienc, Freelancer.experiencs, selected: Freelancer.experiencs[@freelancer.experienc] %>
     </div>
       

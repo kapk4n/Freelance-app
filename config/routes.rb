@@ -14,10 +14,12 @@ Rails.application.routes.draw do
   put 'archivate', to: "order_prof#archivate"
 
   get "order_list", to: "order_list#index"
+  post "searching", to: "order_list#filter"
   get "order_list", to: "order_list#show"
 
   get "freela_list", to: "freela_list#index"
   get "freela_list", to: "freela_list#show"
+  post 'freela_search', to: "freela_list#filter"
 
   post "profile_edit", to: "profile#index"
   put "profile_change", to: "profile#edit"

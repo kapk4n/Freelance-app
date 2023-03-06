@@ -1,0 +1,19 @@
+<%= turbo_frame_tag :result_searching, target: :_top do %>
+<% @array_of_searching.each do |i| %>
+<div class="card">
+  <%# <img src="..." class="card-img-top" alt="..."> %>
+  <div class="card-body">
+    <h5 class="card-title">  <%= i.user.f_name %> <%= i.user.l_name %></h5>
+    <p class="card-text">  <%= i.user.email %></p>
+    <% if i.experienc == '0' || i.experienc.nil? %>
+      <p><p class="fw-bolder"> Experience: </p> No experience</p>
+    <% else %>
+      <p> <p class="fw-bolder"> Experience: </p> <%= "#{i.experienc}"%> years.</p>
+    <%end%>
+    <p><p class="fw-bolder">Employment: </p> <%= i.status %></p>
+    <%= link_to 'Profile', profile_path(id: i.user.id), class:"btn btn-primary" %>
+  </div>
+</div>
+<br>
+<% end %>
+<% end %>
