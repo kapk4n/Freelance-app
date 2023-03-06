@@ -19,7 +19,7 @@ Rails.application.routes.draw do
 
   get "freela_list", to: "freela_list#index"
   get "freela_list", to: "freela_list#show"
-  post 'freela_search', to: "freela_list#filter"
+  get 'freela_search', to: "freela_list#filter"
 
   post "profile_edit", to: "profile#index"
   put "profile_change", to: "profile#edit"

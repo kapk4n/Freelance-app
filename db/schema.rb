@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_03_06_092926) do
+ActiveRecord::Schema[7.0].define(version: 2023_03_06_131649) do
   create_table "clients", force: :cascade do |t|
     t.integer "user_id", null: false
     t.datetime "created_at", null: false
@@ -27,6 +27,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_06_092926) do
     t.string "stack"
     t.integer "experienc"
     t.string "education"
+    t.integer "category"
     t.index ["user_id"], name: "index_freelancers_on_user_id"
   end
 

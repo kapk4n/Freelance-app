@@ -1,5 +1,8 @@
-<%= turbo_frame_tag :result_searching, target: :_top do %>
-<% @array_of_searching.each do |i| %>
+  <%= form_with method: :get, url: freela_search_url do |form| %>
+        <%= form.text_field :search_param, placeholder: 'ruby', class: 'form-control'%>
+        <%= form.submit class: 'btn btn-primary mb-3' %>
+
+<% @array_of_result.each do |i| %>
 <div class="card">
   <%# <img src="..." class="card-img-top" alt="..."> %>
   <div class="card-body">

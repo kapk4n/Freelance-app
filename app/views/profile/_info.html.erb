@@ -30,6 +30,8 @@
     <div class="form-group">
       <p>Education: <%= form.text_area "#{@freelan.education}", disabled: true, class: "form-control form-control-lg", value: "#{@freelan.education}" %></p>
     </div>
+    
+
 
     <div class="form-group">
     <% if @freelan.experienc == '0' %>
@@ -39,6 +41,9 @@
     <%end%>
     </div>
   </div>
+    <div class="form-group">
+      <p>Category: <%= form.label "#{@freelan.category}",  class: "form-label mb-2 mt-3" %>
+    </div>
 <%end%>
 
   <% unless Current.user.nil? %>

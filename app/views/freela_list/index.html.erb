@@ -1,10 +1,38 @@
 <h1>FreelaList#index</h1>
 <p>Find me in app/views/freela_list/index.html.erb</p>
-
-  <%= form_with method: :post, url: freela_search_url do |form| %>
+  <%= form_with method: :get, url: freela_search_url do |form| %>
         <%= form.text_field :search_param, placeholder: 'ruby', class: 'form-control'%>
         <%= form.submit class: 'btn btn-primary mb-3' %>
-  <% end %>
+
+
+<button class="btn btn-dark" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">Filters</button>
+<div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
+  <div class="offcanvas-header">
+    <h5 id="offcanvasRightLabel">Offcanvas right</h5>
+    <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+  </div>
+  <div class="offcanvas-body">
+      
+      
+        <ul> 
+      <% a = [''] %>
+        <% @categories_of_freelancers.each_with_index do |categ, ind| %>
+            <li>
+              <%= check_box_tag 'check_category[]', categ %>
+              <%= h categ[0] %>
+            </li>
+        <% end  %>
+      </ul>
+
+      <%= form.submit class: 'btn btn-primary mb-3' %>
+
+<% end %>
+
+    
+  </div>
+</div>
+
+
 
 <div id="result_searching">
   <% @freelancers.each do |i| %>

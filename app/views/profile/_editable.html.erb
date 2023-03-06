@@ -18,7 +18,11 @@
     </div>
 
     <div class="form-group">
-      <%= form.select :experienc, Freelancer.experiencs, selected: Freelancer.experiencs[@freelancer.experienc] %>
+      <p>Experience: <%= form.select :experienc, Freelancer.experiencs, selected: Freelancer.experiencs[@freelancer.experienc] %>
+    </div>
+
+    <div class="form-group">
+      <p>Category: <%= form.select :category, Freelancer.categories, selected: Freelancer.categories[@freelancer.category] %>
     </div>
       
     <div class="form-group">
