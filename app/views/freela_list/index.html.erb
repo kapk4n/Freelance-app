@@ -16,13 +16,23 @@
       
         <ul> 
       <% a = [''] %>
-        <% @categories_of_freelancers.each_with_index do |categ, ind| %>
+        <% @categories_of_freelancers.each do |categ| %>
             <li>
               <%= check_box_tag 'check_category[]', categ %>
               <%= h categ[0] %>
             </li>
         <% end  %>
       </ul>
+              <ul> 
+      <% a = [''] %>
+        <% Freelancer.statuses.each do |categ| %>
+            <li>
+              <%= check_box_tag 'check_busy[]', categ %>
+              <%= h categ[0] %>
+            </li>
+        <% end  %>
+      </ul>
+
 
       <%= form.submit class: 'btn btn-primary mb-3' %>
 

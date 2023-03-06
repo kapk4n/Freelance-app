@@ -39,15 +39,63 @@ class FreelaListController < ApplicationController
     # @array_of_result = @freelancers.where(["category = ? or category = ? or category = ? or category = ? or category = ? or category = ? or category = ? or category = ? or category = ?", 
     #   a[0].nil? ? nil : a[0][1].to_i, a[1].nil? ? nil : a[1][1].to_i, a[2].nil? ? nil : a[2][1].to_i,
     #    a[3].nil? ? nil : a[3][1].to_i, a[4].nil? ? nil : a[4][1].to_i, a[5].nil? ? nil : a[5][1].to_i, a[6].nil? ? nil : a[6][1].to_i, a[7].nil? ? nil : a[7][1].to_i, a[8].nil? ? nil : a[8][1].to_i])
-    
-    a = Freelancer.all
-    b = []
-    params[:check_category].map(&:split).each do |i|
-      b |= a .where(category: i[1].to_i)
-    end
-    @array_of_result = b
 
-    
+
+
+
+
+
+
+
+    a = Freelancer.all
+    # b = []
+    # unless params[:check_category].nil?
+    # # unless params[:check_busy].nil?
+    #   params[:check_category].map(&:split).each do |i|
+    #     b |= a.where(category: i[1].to_i)
+    #   end
+    #   # params[:check_busy].map(&:split).each do |i|
+    #   #   b |= a.where(status: i[1].to_i)
+    #   # end
+    #   b = b.find_all{|i| i.stack.downcase.include?"#{params[:search_param]}".downcase }
+    #   b |= b.find_all{|i| i.info.downcase.include?"#{params[:search_param]}".downcase }  
+    # else 
+    #   b = a.find_all{|i| i.stack.downcase.include?"#{params[:search_param]}".downcase }
+    #   b |= b.find_all{|i| i.info.downcase.include?"#{params[:search_param]}".downcase }
+    # end
+
+    # @array_of_result = b
+
+
+
+
+    # redirect_to root_path, notice: a.where(status: params[:check_busy].map(&:split)[0][1].to_i)
+    # b = a.where(status: params[:check_busy].map(&:split)[0][1].to_i)
+
+      
+      
+      unless params[:check_category].nil?
+        b = []
+        params[:check_category].map(&:split).each do |i|
+          b |= a.where(category: i[1].to_i)
+        end
+      else
+        b = a
+      end
+
+      unless params[:check_busy].nil?
+        c = [] 
+        params[:check_busy].map(&:split).each do |i|
+          c |= a.where(status: i[1].to_i)
+        end
+      else 
+        c = a
+      end
+
+        f = a.find_all{|i| i.stack.downcase.include?"#{params[:search_param]}".downcase }
+        f |= f.find_all{|i| i.info.downcase.include?"#{params[:search_param]}".downcase }
+
+      @array_of_result = b & c & f
     # @freelancers.where(["category = ? or category = ? or category = ?", ])
 
   end
