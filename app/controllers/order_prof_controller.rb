@@ -8,7 +8,7 @@ class OrderProfController < ApplicationController
 
   def show
     @order = Order.find_by(id: params[:id])
-    if PreOrder.where(order_id: params[:id]).count.zero?
+    if PreOrder.where(order_id: params[:id]).count.zero? && Order.find_by(id: params[:id]).freelanc_id.nil?
       render "show"
     else
       flash[:alert] = "You can not edit this order. This order has already taken by someone"
@@ -19,7 +19,7 @@ class OrderProfController < ApplicationController
   def prefree
     @preorder = PreOrder.where(order_id: params[:id])
     @freelancers = Freelancer.all
-    if @preorder.count.zero?
+    if @preorder.count.zero? && Order.where(id: params[:id]).count !=0
       redirect_to ord_prof_path(id: params[:id]), alert: "Nobody have taken your order"
     end
   end
@@ -50,7 +50,7 @@ class OrderProfController < ApplicationController
 
   def delete
     @order = Order.find_by(id: params[:id])
-    if PreOrder.where(order_id: params[:id]).count.zero?
+    if PreOrder.where(order_id: params[:id]).count.zero? && Order.where(id: params[:id]).count.zero?
       Order.find_by(id: params[:id]).destroy
       redirect_to order_list_path
     else

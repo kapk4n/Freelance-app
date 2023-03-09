@@ -32,6 +32,16 @@
             </li>
         <% end  %>
       </ul>
+                    <ul> 
+      <% a = [''] %>
+      <% array_of_marks = [1,2,3,4,5] %>
+        <% array_of_marks.each do |mark| %>
+            <li>
+              <%= check_box_tag 'check_review[]', mark %>
+              <%= h mark %>
+            </li>
+        <% end  %>
+      </ul>
 
 
       <%= form.submit class: 'btn btn-primary mb-3' %>

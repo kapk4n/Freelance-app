@@ -92,10 +92,31 @@ class FreelaListController < ApplicationController
         c = a
       end
 
+      fre_list = Review.all
+      unless params[:check_review].nil?
+        extra_d = []
+        params[:check_review].each do |i|
+          extra_d |= fre_list.select(:freelancer_id).distinct.where(mark: i)
+        end
+      else 
+        redirect_to root_path, notice: "bad"
+        extra_d = a
+      end
+
+      unless extra_d.nil?
+        d = []
+        extra_d.each do |i|
+          d |= [(i.freelancer)].to_a
+        end
+      else 
+        redirect_to root_path, notice: "bad"
+        d = a
+      end
+
         f = a.find_all{|i| i.stack.downcase.include?"#{params[:search_param]}".downcase }
         f |= f.find_all{|i| i.info.downcase.include?"#{params[:search_param]}".downcase }
 
-      @array_of_result = b & c & f
+      @array_of_result = b & c & d & f
     # @freelancers.where(["category = ? or category = ? or category = ?", ])
 
   end

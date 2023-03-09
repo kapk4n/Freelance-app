@@ -42,7 +42,7 @@ class ProfileController < ApplicationController
           @adr_marks = @adr_marks / marks.count
         end
       end
-      
+
     else
       redirect_to root_path, alert: 'You must be logged in'
     end
