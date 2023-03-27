@@ -1,9 +1,5 @@
-<h1>OrderList#index</h1>
-<p>Find me in app/views/order_list/index.html.erb</p>
 
-<%#= @orders.find_all{|i| i.message.include?'Ruby'} %>
-<%#= @orders.where("message LIKE :search", search: "%Ruby%").first.title %>
-  <%= form_with method: :get, url: searching_url do |form| %>
+ <%= form_with method: :get, url: searching_url do |form| %>
         <%= form.text_field :search_param, placeholder: 'ruby', class: 'form-control'%>
         <%= form.submit 'Find', class: 'btn btn-primary' %>
 
@@ -17,7 +13,7 @@
   <div class="offcanvas-body">
 
       <ul> 
-       <li><p>Cost:</p></li>
+        <li><p>Cost:</p></li>
         <% a = [''] %>
         <%= form.number_field :check_cost_start, placeholder: '1', class: 'form-control', min: 1%>
         <%= form.number_field :check_cost_end, placeholder: '1000', class: 'form-control', min: 1  %>
@@ -40,10 +36,7 @@
       <% end %>
       <br>
 
-
-
-<div id='result_searching'>
-  <% @orders.each do |i| %>
+  <% @array_of_result.each do |i| %>
     <% if i.freelanc_id.nil? %>
       <div class="card">
         <div class="card-body">
@@ -61,4 +54,3 @@
     <% end %>
 
   <% end %>
-</div>

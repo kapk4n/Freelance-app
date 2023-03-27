@@ -1,7 +1,67 @@
   <%= form_with method: :get, url: freela_search_url do |form| %>
         <%= form.text_field :search_param, placeholder: 'ruby', class: 'form-control'%>
-        <%= form.submit class: 'btn btn-primary mb-3' %>
 
+        <%= form.submit class: 'btn btn-primary' %>
+
+<button class="btn btn-dark" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">Filters</button>
+<div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
+  <div class="offcanvas-header">
+    <h5 id="offcanvasRightLabel">Offcanvas right</h5>
+    <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+  </div>
+  <div class="offcanvas-body">
+      
+      <ul> 
+        <% a = [''] %>
+        <li><p>Categories:</p></li>
+        <% @categories_of_freelancers.each do |categ| %>
+            <div>
+              <%= check_box_tag 'check_category[]', categ %>
+              <%= h categ[0] %>
+            </div>
+        <% end  %>
+      </ul>
+      
+      <ul> 
+        <% a = [''] %>
+        <li><p>Employment:</p></li>
+        <% Freelancer.statuses.each do |categ| %>
+            <div>
+              <%= check_box_tag 'check_busy[]', categ %>
+              <%= h categ[0] %>
+            </div>
+        <% end  %>
+      </ul>
+
+      <ul> 
+        <% a = [''] %>
+        <li><p>Marks:</p></li>
+        <% array_of_marks = [1,2,3,4,5] %>
+        <% array_of_marks.each do |mark| %>
+            <div>
+              <%= check_box_tag 'check_review[]', mark %>
+              <%= h mark %>
+            </div>
+        <% end  %>
+      </ul>
+
+      <ul> 
+        <% a = [''] %>
+        <li><p>Experience:</p></li>
+        <% @experience_of_freelansers.each do |exper| %>
+            <div>
+              <%= check_box_tag 'check_experienc[]', exper %>
+              <%= exper[0] %>
+            </div>
+        <% end  %>
+      </ul>
+
+
+      <%= form.submit class: 'btn btn-primary' %>
+      <% end %>
+  </div>
+</div>
+<br>
 <% @array_of_result.each do |i| %>
 <div class="card">
   <%# <img src="..." class="card-img-top" alt="..."> %>
@@ -18,5 +78,4 @@
   </div>
 </div>
 <br>
-<% end %>
 <% end %>

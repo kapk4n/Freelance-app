@@ -2,6 +2,7 @@ class FreelaListController < ApplicationController
   def index
     @freelancers = Freelancer.all
     @categories_of_freelancers = Freelancer.categories
+    @experience_of_freelansers = Freelancer.experiencs
   end
 
   def show
@@ -11,6 +12,8 @@ class FreelaListController < ApplicationController
 
   def filter
     @freelancers = Freelancer.all
+    @categories_of_freelancers = Freelancer.categories
+    @experience_of_freelansers = Freelancer.experiencs
 
     # @array_of_result = []
     # unless params[:role_ids].nil?
@@ -88,37 +91,60 @@ class FreelaListController < ApplicationController
         params[:check_busy].map(&:split).each do |i|
           c |= a.where(status: i[1].to_i)
         end
-      else 
+      else
         c = a
       end
 
-      fre_list = Review.all
-      unless params[:check_review].nil?
-        extra_d = []
-        params[:check_review].each do |i|
-          extra_d |= fre_list.select(:freelancer_id).distinct.where(mark: i)
-        end
-      else 
-        redirect_to root_path, notice: "bad"
-        extra_d = a
-      end
+      # fre_list = Review.all
+      # unless params[:check_review].nil?
+      #   extra_d = []
+      #   params[:check_review].each do |i|
+      #     extra_d |= fre_list.select(:freelancer_id).distinct.where(mark: i)
+      #   end
+      # else
+      #   d = a
+      # end
 
-      unless extra_d.nil?
+      unless params[:check_review].nil?
         d = []
-        extra_d.each do |i|
-          d |= [(i.freelancer)].to_a
+        @freelancers.each do |i|
+          marks = Review.where(freelancer_id: i.id)
+          adr_marks = 0.0
+          if marks != []
+            marks.each do |rev|
+              adr_marks += rev.mark
+            end
+            adr_marks /= marks.count
+          end
+          (adr_marks + 0.5 > params[:check_review][0].to_f) ? d |= [i] : nil
         end
-      else 
-        redirect_to root_path, notice: "bad"
+      else
         d = a
       end
 
-        f = a.find_all{|i| i.stack.downcase.include?"#{params[:search_param]}".downcase }
-        f |= f.find_all{|i| i.info.downcase.include?"#{params[:search_param]}".downcase }
+      # unless extra_d.nil?
+      #   d = []
+      #   extra_d.each do |i|
+      #     d |= [(i.freelancer)].to_a
+      #   end
+      # else
+        # d = a
+      # end
 
-      @array_of_result = b & c & d & f
+      unless params[:check_experienc].nil?
+        e = []
+        params[:check_experienc].map(&:split).each do |i|
+          e |= a.where(experienc: i[1].to_i)
+        end
+      else
+        e = a
+      end
+
+        f1 = a.find_all{|i| i.stack.downcase.include?"#{params[:search_param]}".downcase }
+        f2 = a.find_all{|i| i.info.downcase.include?"#{params[:search_param]}".downcase }
+
+      @array_of_result = b & c & d & (f1 | f2) & e
     # @freelancers.where(["category = ? or category = ? or category = ?", ])
-
   end
 end
 

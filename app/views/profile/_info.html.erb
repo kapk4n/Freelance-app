@@ -2,6 +2,10 @@
 <div id="info">
 
 
+<% Order.where(freelanc_id: @freelan.id).each do |i| %>
+  <%= i.title %>
+<% end %>
+
 <%= form_with do |form| %>
 
   <%# <br>

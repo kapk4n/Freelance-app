@@ -2,7 +2,8 @@
 <p>Find me in app/views/freela_list/index.html.erb</p>
   <%= form_with method: :get, url: freela_search_url do |form| %>
         <%= form.text_field :search_param, placeholder: 'ruby', class: 'form-control'%>
-        <%= form.submit class: 'btn btn-primary mb-3' %>
+        <%= form.submit 'Find', class: 'btn btn-primary' %>
+
 
 
 <button class="btn btn-dark" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">Filters</button>
@@ -13,38 +14,53 @@
   </div>
   <div class="offcanvas-body">
       
-      
-        <ul> 
-      <% a = [''] %>
+      <ul> 
+        <% a = [''] %>
+        <li><p>Categories:</p></li>
         <% @categories_of_freelancers.each do |categ| %>
-            <li>
+            <div>
               <%= check_box_tag 'check_category[]', categ %>
               <%= h categ[0] %>
-            </li>
+            </div>
         <% end  %>
       </ul>
-              <ul> 
-      <% a = [''] %>
+      
+      <ul> 
+        <% a = [''] %>
+        <li><p>Employment:</p></li>
         <% Freelancer.statuses.each do |categ| %>
-            <li>
+            <div>
               <%= check_box_tag 'check_busy[]', categ %>
               <%= h categ[0] %>
-            </li>
+            </div>
         <% end  %>
       </ul>
-                    <ul> 
-      <% a = [''] %>
-      <% array_of_marks = [1,2,3,4,5] %>
+
+      <ul> 
+        <% a = [''] %>
+        <li><p>Marks:</p></li>
+        <% array_of_marks = [1,2,3,4,5] %>
         <% array_of_marks.each do |mark| %>
-            <li>
+            <div>
               <%= check_box_tag 'check_review[]', mark %>
               <%= h mark %>
-            </li>
+            </div>
+        <% end  %>
+      </ul>
+
+      <ul> 
+        <% a = [''] %>
+        <li><p>Experience:</p></li>
+        <% @experience_of_freelansers.each do |exper| %>
+            <div>
+              <%= check_box_tag 'check_experienc[]', exper %>
+              <%= exper[0] %>
+            </div>
         <% end  %>
       </ul>
 
 
-      <%= form.submit class: 'btn btn-primary mb-3' %>
+      <%= form.submit 'Find', class: 'btn btn-primary' %>
 
 <% end %>
 
@@ -53,6 +69,7 @@
 </div>
 
 
+      <br>
 
 <div id="result_searching">
   <% @freelancers.each do |i| %>

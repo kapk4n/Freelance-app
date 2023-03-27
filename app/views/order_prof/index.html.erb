@@ -4,6 +4,11 @@
 
 <div id="info">
 
+<% unless @order.freelanc_id.nil? %>
+ <h1> In work by <%= link_to "#{Freelancer.find_by(id: @order.freelanc_id).user.email}", profile_path(id: Freelancer.find_by(id: @order.freelanc_id).user.id) %> </h1>
+<% end %>
+
+<br>
 <h1><%= @order.title %></h1>
 
 
